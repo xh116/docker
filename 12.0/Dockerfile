@@ -79,8 +79,8 @@ RUN curl -o odoo.deb -sSL http://nightly.odoo.com/${ODOO_VERSION}/nightly/deb/od
         && rm -rf /var/lib/apt/lists/* odoo.deb
 
 # Copy entrypoint script and Odoo configuration file
-COPY ./entrypoint.sh /
-COPY ./odoo.conf /etc/odoo/
+COPY /12.0/entrypoint.sh /
+COPY /12.0/odoo.conf /etc/odoo/
 
 # Mount /var/lib/odoo to allow restoring filestore and /mnt/extra-addons for users addons
 RUN chown odoo /etc/odoo/odoo.conf \
@@ -89,7 +89,7 @@ RUN chown odoo /etc/odoo/odoo.conf \
 VOLUME ["/var/lib/odoo", "/mnt/extra-addons"]
 
 # Add addons
-COPY ./extra-addons /mnt
+COPY /12.0/extra-addons /mnt
 
 # Expose Odoo services
 EXPOSE 8069 8071 8072
