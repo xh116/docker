@@ -89,7 +89,8 @@ RUN chown odoo /etc/odoo/odoo.conf \
 VOLUME ["/var/lib/odoo", "/mnt/extra-addons"]
 
 # Add addons
-COPY /12.0/extra-addons /mnt
+COPY /12.0/extra-addons /mnt/extra-addons
+RUN  chown -R odoo /mnt/extra-addons
 
 # Expose Odoo services
 EXPOSE 8069 8071 8072
