@@ -65,7 +65,7 @@ RUN echo "deb http://deb.nodesource.com/node_8.x stretch main" > /etc/apt/source
     && npm install -g rtlcss \
     && rm -rf /var/lib/apt/lists/*
 
-#install auto_backup dependencies 
+# Install auto_backup dependencies 
 RUN pip3 install wheel && pip3 install pysftp
     
 # Install Odoo
@@ -87,6 +87,9 @@ RUN chown odoo /etc/odoo/odoo.conf \
     && mkdir -p /mnt/extra-addons \
     && chown -R odoo /mnt/extra-addons
 VOLUME ["/var/lib/odoo", "/mnt/extra-addons"]
+
+# Add addons
+COPY ./extra-addons /mnt
 
 # Expose Odoo services
 EXPOSE 8069 8071 8072
