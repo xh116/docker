@@ -15,7 +15,8 @@ RUN apt-get update \
             ca-certificates \
             curl \
             dirmngr \
-            fonts-noto-cjk \
+            ttf-wqy-zenhei \
+            ttf-wqy-microhei \
             gnupg \
             libssl1.0-dev \
             node-less \
@@ -93,7 +94,7 @@ COPY /12.0/extra-addons /mnt/extra-addons
 RUN  chown -R odoo /mnt/extra-addons
 
 # Expose Odoo services
-EXPOSE 8069 8071 8072
+EXPOSE 8069   
 
 # Set the default config file
 ENV ODOO_RC /etc/odoo/odoo.conf
