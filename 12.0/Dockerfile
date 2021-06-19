@@ -70,8 +70,8 @@ RUN pip3 install wheel && pip3 install pysftp
     
 # Install Odoo
 ENV ODOO_VERSION 12.0
-ARG ODOO_RELEASE=20210525
-ARG ODOO_SHA=c08514dbe2c590a2d9f6029a3fe8abb58306e3a6
+ARG ODOO_RELEASE=20210618
+ARG ODOO_SHA=1d696a2d048cfdf49ba5daa4e1655901ea507bc1
 RUN curl -o odoo.deb -sSL http://nightly.odoo.com/${ODOO_VERSION}/nightly/deb/odoo_${ODOO_VERSION}.${ODOO_RELEASE}_all.deb \
         && echo "${ODOO_SHA} odoo.deb" | sha1sum -c - \
         && apt-get update \
