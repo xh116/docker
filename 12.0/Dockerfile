@@ -87,11 +87,11 @@ ENV WEBDATA /var/lib/odoo
 ENV ADDONS /mnt/extra-addons
 ENV BACKUPS /opt/odoo/backups
 
-RUN mkdir -p "$WEBDATA" && chown -R 101 "$WEBDATA" && chmod 777 "$WEBDATA"
+RUN mkdir -p "$WEBDATA" && chown -R 101 "$WEBDATA"  
 
-RUN mkdir -p "$ADDONS" && chown -R 101 "$ADDONS" && chmod 777 "$ADDONS"
+RUN mkdir -p "$ADDONS" && chown -R 101 "$ADDONS"  
 
-RUN mkdir -p "$BACKUPS" && chown -R 101 "$BACKUPS" && chmod 777 "$BACKUPS"
+RUN mkdir -p "$BACKUPS" && chown -R 101 "$BACKUPS"  
 
 # Mount /var/lib/odoo to allow restoring filestore and /mnt/extra-addons for users addons
 RUN chown odoo /etc/odoo/odoo.conf 
@@ -107,10 +107,6 @@ EXPOSE 8069
 
 # Set the default config file
 ENV ODOO_RC /etc/odoo/odoo.conf
-
-
-
-
 
 
 COPY /12.0/wait-for-psql.py /usr/local/bin/wait-for-psql.py
