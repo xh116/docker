@@ -43,11 +43,5 @@ case "$1" in
         exec "$@"
 esac
 
-if [ "$(id -u)" = '0' ]; then
-     find ("$WEBDATA" "$ADDONS" "$BACKUPS")  \! -user 101 -exec sudo chown -R 101 '{}' +
-fi
-
-exec "$@"
-
 
 exit 1
