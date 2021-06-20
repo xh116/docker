@@ -24,6 +24,7 @@ check_config "db_port" "$PORT"
 check_config "db_user" "$USER"
 check_config "db_password" "$PASSWORD"
 
+ 
 case "$1" in
     -- | odoo)
         shift
@@ -41,5 +42,12 @@ case "$1" in
     *)
         exec "$@"
 esac
+
+if [ "$(id -u)" = '0' ]; then
+     find ("$WEBDATA" "$ADDONS" "$BACKUPS")  \! -user 101 -exec sudo chown -R 101 '{}' +
+fi
+
+exec "$@"
+
 
 exit 1
