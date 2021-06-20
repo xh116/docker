@@ -83,16 +83,24 @@ RUN curl -o odoo.deb -sSL http://nightly.odoo.com/${ODOO_VERSION}/nightly/deb/od
 COPY /12.0/entrypoint.sh /
 COPY /12.0/odoo.conf /etc/odoo/
 
+ENV WEBDATA /var/lib/odoo
+ENV ADDONS /mnt/extra-addons
+ENV BACKUPS /opt/odoo/backups
+
+RUN mkdir -p "$WEBDATA" && chown -R 101 "$WEBDATA" && chmod 777 "$WEBDATA"
+
+RUN mkdir -p "$ADDONS" && chown -R 101 "$ADDONS" && chmod 777 "$ADDONS"
+
+RUN mkdir -p "$BACKUPS" && chown -R 101 "$BACKUPS" && chmod 777 "$BACKUPS"
+
 # Mount /var/lib/odoo to allow restoring filestore and /mnt/extra-addons for users addons
-RUN chown odoo /etc/odoo/odoo.conf \
-    && mkdir -p /mnt/extra-addons \
-    && mkdir -p /opt/odoo/backups \
-    && chown -R odoo /mnt/extra-addons
+RUN chown odoo /etc/odoo/odoo.conf 
+ 
 VOLUME ["/var/lib/odoo", "/mnt/extra-addons", "/opt/odoo/backups" ]
 
 # Add addons
 COPY /12.0/extra-addons /mnt/extra-addons
-RUN  chown -R odoo /mnt/extra-addons
+RUN  chown -R 101 /mnt/extra-addons
 
 # Expose Odoo services
 EXPOSE 8069   
@@ -100,9 +108,6 @@ EXPOSE 8069
 # Set the default config file
 ENV ODOO_RC /etc/odoo/odoo.conf
 
-ENV WEBDATA /var/lib/odoo
-ENV ADDONS /mnt/extra-addons
-ENV BACKUPS /opt/odoo/backups
 
 
 
