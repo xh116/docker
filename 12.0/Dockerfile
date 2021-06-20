@@ -91,7 +91,7 @@ RUN chown odoo /etc/odoo/odoo.conf \
     && mkdir -p /opt/odoo/backups \
     && chown -R odoo /mnt/extra-addons
  
-VOLUME ["/var/lib/odoo", "/mnt/extra-addons", "/opt/odoo/backups" ]
+VOLUME ["/var/lib/odoo", "/mnt/extra-addons" ]
 
 # Add addons
 COPY /12.0/extra-addons /mnt/extra-addons
